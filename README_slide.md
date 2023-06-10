@@ -1,4 +1,11 @@
+---
+marp: true
+paginate: true
+footer: ©2023 Takumi BAN, BohPJ
+
+---
 # Next.js-hands-on
+---
 ### プロジェクトの作成
 1. node, npmのバージョン確認
 ```shell
@@ -14,12 +21,14 @@ $ npm -v
 - 何も表示されない
     - インストールを行う
 
+---
 2. node, npmのインストール
 ```shell
 $ brew install node
 ```
 1.と同様にバージョンを確認し、表示されたら成功
 
+---
 3. Next.jsプロジェクトを作成
 ```shell
 $ npx create-next-app@latest next-practice --typescript
@@ -36,6 +45,8 @@ $ npx create-next-app@latest next-practice --typescript
 ```shell
 ? Would you like to use `src/` directory with this project? › No / Yes
 ```
+
+---
 - App Routerを使うかきかれるので`No`を選択
 ```shell
 ? Use App Router (recommended)? › No / Yes
@@ -52,19 +63,21 @@ Success! Created next-practice at
 ```shell
 $ cd next-practice
 ```
+
+---
 - サーバの起動
 ```shell
 $ npm run dev
 ```
 - Webブラウザからhttp://localhost:3000にアクセス
 - このように表示されれば成功
-![mainpage](./img/main.png)
+![height:300](./img/main.png)
 
+---
 ### Next.jsにおけるルーティング
 - 基本ルーティング
     - `pages`ディレクトリ内のファイル構成に応じてルーティングが生成される
     - `pages/hello.tsx`を作成
-    - 以下を`pages/hello.tsx`に記述
     ```typescript
     export default function Hello() {
         return (
@@ -80,6 +93,7 @@ $ npm run dev
     ```
     - `http://localhost:3000/hello`にアクセス
 
+---
 - ネストルーティング
     - `pages`ディレクトリ内に任意のディレクトリを作成・その中のファイル構成に応じてルーティングが生成される
     - `pages/member/watashi.tsx`を作成
@@ -87,7 +101,10 @@ $ npm run dev
     $ mkdir src/pages/member
     $ touch src/pages/member/watashi.tsx
     ```
-    - 以下を`pages/member/watashi.tsx`に記述
+
+---
+
+- `pages/member/watashi.tsx`に記述
     ```typescript
     export default function ThisIsMe() {
         return (
@@ -103,12 +120,17 @@ $ npm run dev
             </main>
         )
     }
-
     ```
-    - `http://localhost:3000/member/watashi`にアクセス
+    
 
-    - ディレクトリを指定すると自動的に`index.tsx`が参照される
-    - `pages/member/index.tsx`を作成
+---
+
+- `http://localhost:3000/member/watashi`にアクセス
+- ディレクトリを指定すると自動的に`index.tsx`が参照される
+
+---
+
+- `pages/member/index.tsx`を作成
     ```typescript
     import Link from 'next/link'
 
@@ -127,9 +149,9 @@ $ npm run dev
             </main>
         )
     }
-
     ```
 
+---
 - ダイナミックルーティング
     - リスエストされたパスに応じてダイナミックにページを生成
     - 任意のディレクトリ直下にファイル名を`[]`で囲ったファイルを作成
@@ -148,12 +170,17 @@ $ npm run dev
     - `http://localhost:3000/member/1`にアクセス
     - `http://localhost:3000/member/2`にアクセス
 
+---
+
 ### コンポーネントの作成
 - Component: 部品
 - Componentを作成すると同じ部分を使い回すことができる
     - 例: ヘッダー・フッター・ナビゲーションバー
 - Componentの保存場所を作成
     - `src/components`を作成
+
+---
+
 - ナビゲーションバーを作成してみる
     - `src/components/navigation`を作成
     - `src/components/navigation/index.tsx`を作成
@@ -172,7 +199,10 @@ $ npm run dev
         )
     }
     ```
-    - `src/components/navigation/navigation.module.css`を作成
+
+---
+
+- `src/components/navigation/navigation.module.css`を作成
     ```typescript
     .nav {
         background-color: #666;
@@ -216,7 +246,8 @@ $ npm run dev
 
     ```
 
-    - `src/pages/index.tsx`を変更
+---
+- `src/pages/index.tsx`を変更
     ```typescript
     import Image from 'next/image'
     import Link from 'next/link'
@@ -243,12 +274,18 @@ $ npm run dev
     }
 
     ```
-    - メンバー一覧のページにはナビゲーションバーが表示されない...
+
+---
+
+- メンバー一覧のページにはナビゲーションバーが表示されない...
     - `src/pages/member/index.tsx`にナビゲーションバーを呼び出してみよう
     - `import Navigation from '../../components/navigation'`でComponentの読み込み
     - `<Navigation></Navigation>`でComponentを表示
         - `<Navigation />`でも同じように表示される
         - `<Navigation />` == `<Navigation></Navigation>` (同値)
+
+---
+- src/pages/member/index.tsx`
     ```typescript
     import Link from 'next/link'
     import Navigation from '../../components/navigation'
@@ -272,4 +309,3 @@ $ npm run dev
         )
     }
     ```
-    
